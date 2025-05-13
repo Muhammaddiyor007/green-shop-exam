@@ -23,14 +23,14 @@ const Hero = () => {
     const lastWord = words.pop();
 
     return (
-      <h2 className="md:text-[70px] text-[24px] leading-[29xp] uppercase md:leading-[70px] text-[#3D3D3D] tracking-[0%] mb-4 font-black bg-[#ffffff42] md:bg-transparent">
+      <h2 className="text-[24px] md:text-[48px] lg:text-[70px] leading-[30px] md:leading-[50px] lg:leading-[70px] uppercase text-[#3D3D3D] tracking-[0%] mb-4 font-black bg-[#ffffff42] md:bg-transparent">
         {words.join(" ")} <span className="text-green-600">{lastWord}</span>
       </h2>
     );
   };
 
   return (
-    <div className="container max-w-[1200px] mx-auto bg-[#F5F5F580] h-[450px] my-[12px] relative ">
+    <div className="container max-w-[1200px] mx-auto bg-[#F5F5F580] h-auto md:h-[450px] my-[12px] relative">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -44,28 +44,31 @@ const Hero = () => {
         }}
         modules={[Autoplay, Pagination]}
         onAutoplayTimeLeft={onAutoplayTimeLeft}
-        className="mySwiper h-full "
+        className="mySwiper h-full"
       >
         {heroSlider.map((slide, idx) => (
           <SwiperSlide key={idx}>
-            <div className="flex items-center justify-between h-full px-10 font-inter ">
-              <div className="max-w-[600px] relative z-50">
-                <p className="text-[#564545] text-[11px] md:text-[14px] uppercase tracking-[10%] leading-[16px] font-medium mb-2 bg-white md:bg-transparent w-fit inline-block ">
+            <div className="flex flex-col-reverse md:flex-row items-center justify-between h-full px-4 md:px-10 font-inter gap-6 md:gap-0 py-6 md:py-0">
+              <div className="w-full md:w-1/2 max-w-[600px] relative z-50 text-center md:text-left">
+                <p className="text-[#564545] text-[11px] md:text-[14px] uppercase tracking-[10%] leading-[16px] font-medium mb-2 bg-white md:bg-transparent w-fit inline-block">
                   {slide.greetings}
                 </p>
                 {renderTitle(slide.title)}
-                <p className="text-[#727272] text-[14px] leading-[24px] md:bg-transparent bg-[#ffffff5f] font-normal w-fit inline-block md:w-full">
+                <p className="text-[#727272] text-[14px] leading-[24px] font-normal w-fit md:w-full inline-block md:bg-transparent bg-[#ffffff5f] mb-4">
                   {slide.content}
                 </p>
-                <button className="btn bg-[#46A358] text-white">
+                <button className="btn bg-[#46A358] text-white mt-2">
                   Shop now
                 </button>
               </div>
-              <img
-                src={heroImg}
-                alt="plant"
-                // className='h-[350px] object-contain absolute md:static right-[-95px] z-10'
-              />
+
+              <div className="w-full md:w-1/2 flex justify-center md:justify-end">
+                <img
+                  src={heroImg}
+                  alt="plant"
+                  className="w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] xl:w-[400px] object-contain"
+                />
+              </div>
             </div>
           </SwiperSlide>
         ))}
@@ -87,10 +90,10 @@ const Hero = () => {
           ></span>
         </div>
       </Swiper>
-      <div className="custom-pagination mt-4 flex justify-center gap-2 absolute bottom-[17px]  z-[40] " />
+
+      <div className="custom-pagination mt-4 flex justify-center gap-2 absolute bottom-[17px] left-0 right-0 z-[40]" />
     </div>
   );
-  //
 };
 
 export default Hero;

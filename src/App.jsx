@@ -5,7 +5,6 @@ import Shop from "./pages/shop/Shop";
 import Checkout from "./components/Checkout";
 import Cart from "./pages/home/Cart";
 import Detail from "./pages/shop/Detail";
-import Auth from "./components/Auth"
 
 const App = () => {
   return (
@@ -15,11 +14,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/cart" element={<Cart/>} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/shop/:id" element={<Detail />} />
-
-          <Route path="/auth" element={<Auth />} />
-
         </Routes>
       </Layout>
     </Router>

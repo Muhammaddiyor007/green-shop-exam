@@ -85,20 +85,17 @@ export default function PlantShop() {
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
 
   return (
-    <div className="container flex flex-col lg:flex-row gap-6 p-4 sm:p-6">
-      <aside className="w-full lg:w-64">
+    <div className="container mx-auto flex flex-col md:flex-row gap-6 p-4 md:p-6">
+      <aside className="w-full md:w-64">
         <h3 className="font-bold mb-2">Categories</h3>
         <ul className="space-y-1">
           {Object.entries(categoryCounts).map(([cat, count]) => (
             <li key={cat}>
               <button
                 onClick={() => setCategory(cat)}
-                className={`text-left w-full ${
-                  category === cat ? "font-bold text-green-600" : ""
-                }`}
+                className={`text-left w-full ${category === cat ? "font-bold text-green-600" : ""}`}
               >
-                {cat}{" "}
-                <span className="text-sm text-gray-500">({count})</span>
+                {cat} <span className="text-sm text-gray-500">({count})</span>
               </button>
             </li>
           ))}
@@ -134,7 +131,7 @@ export default function PlantShop() {
 
       <div className="flex-1">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-4">
             <button
               className={
                 category === "All" && sort === "default"
@@ -156,9 +153,7 @@ export default function PlantShop() {
             </button>
             <button
               onClick={() => setSort("priceHigh")}
-              className={
-                sort === "priceHigh" ? "text-green-600 font-bold" : ""
-              }
+              className={sort === "priceHigh" ? "text-green-600 font-bold" : ""}
             >
               Sale
             </button>
@@ -166,7 +161,7 @@ export default function PlantShop() {
           <select
             onChange={(e) => setSort(e.target.value)}
             value={sort}
-            className="border p-1"
+            className="border p-1 rounded w-full sm:w-auto"
           >
             <option value="default">Default sorting</option>
             <option value="priceLow">Price: low to high</option>
@@ -185,7 +180,7 @@ export default function PlantShop() {
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
           {currentItems.map((product) => (
             <div
               key={product.id}
@@ -222,13 +217,10 @@ export default function PlantShop() {
                     }`}
                   />
                 </button>
+
                 <button
                   onClick={() => toggleWishlist(product.id)}
-                  className={`hover:text-red-500 ${
-                    wishlist.includes(product.id)
-                      ? "text-red-500"
-                      : "text-gray-400"
-                  }`}
+                  className={`hover:text-red-500 ${wishlist.includes(product.id) ? "text-red-500" : "text-gray-400"}`}
                 >
                   <FaHeart />
                 </button>
@@ -237,7 +229,7 @@ export default function PlantShop() {
           ))}
         </div>
 
-        <div className="flex flex-wrap justify-center items-center mt-6 gap-2">
+        <div className="flex justify-center items-center mt-6 flex-wrap gap-2">
           {Array.from({ length: totalPages }, (_, i) => (
             <button
               key={i}
