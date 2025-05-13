@@ -13,8 +13,8 @@ const Posts = () => {
 
       <div className='flex flex-col lg:flex-row gap-[44px] lg:gap-[30px]'>
         {
-          postItems?.map((item) => (
-            <div className='flex flex-col gap-2 max-w-full'>
+          postItems?.map((item, index) => (
+            <div key={index} className='flex flex-col gap-2 max-w-full'>
               <img
                 src={item.img}
                 alt=""
