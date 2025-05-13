@@ -22,6 +22,11 @@ const Cart = () => {
           <ul className="space-y-2">
             {cartItems.map((item) => (
               <li key={item.id} className="border p-3 rounded shadow-sm">
+                <img
+                      src={item.thumbnail}
+                      alt={item.title}
+                      className="w-[70px] h-[70px]"
+                    />
                 <p>
                   <strong>{item.name}</strong>
                 </p>

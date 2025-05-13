@@ -17,6 +17,11 @@ const ShoppingPage = () => {
         cartItems.map((item) => (
           <div key={item.id} className='border p-2 mb-2 flex justify-between items-center'>
             <div>
+              <img
+                      src={item.thumbnail}
+                      alt={item.title}
+                      className="w-[70px] h-[70px]"
+                    />
               <p className='font-bold'>{item.title}</p>
               <p>${item.price}</p>
             </div>
