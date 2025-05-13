@@ -210,7 +210,7 @@ export default function PlantShop() {
                   className="text-green-600 hover:text-green-800"
                 >
                   <FaShoppingCart
-                    className={`p-1 rounded ${
+                    className={`p-1 size-7 rounded ${
                       cartItems.some((item) => item.id === product.id)
                         ? "bg-green-600 text-white"
                         : "bg-white text-green-600"
@@ -220,7 +220,7 @@ export default function PlantShop() {
 
                 <button
                   onClick={() => toggleWishlist(product.id)}
-                  className={`hover:text-red-500 ${wishlist.includes(product.id) ? "text-red-500" : "text-gray-400"}`}
+                  className={` size-11 hover:text-red-500 ${wishlist.includes(product.id) ? "text-red-500" : "text-gray-400"}`}
                 >
                   <FaHeart />
                 </button>
