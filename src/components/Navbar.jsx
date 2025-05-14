@@ -4,10 +4,12 @@ import { CiSearch, CiShoppingCart } from "react-icons/ci";
 import { IoIosLogOut, IoMdMenu, IoMdClose } from "react-icons/io";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import AuthModal from "../components/AuthModal";
 
 const Navbar = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showAuth, setShowAuth] = useState(false); // ✅ Auth modal state
 
   const navLinkClass = ({ isActive }) =>
     isActive
@@ -34,12 +36,12 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/plant-care" className={navLinkClass}>
+            <NavLink to="/profile/accountdetail" className={navLinkClass}>
               Plant Care
             </NavLink>
           </li>
           <li>
-            <NavLink to="/blogs" className={navLinkClass}>
+            <NavLink to="/blog" className={navLinkClass}>
               Blogs
             </NavLink>
           </li>
@@ -56,10 +58,15 @@ const Navbar = () => {
               {cartItems.length}
             </span>
           </Link>
-          <button className="btn bg-[#46A358] text-white flex items-center gap-1 px-4 py-2 rounded whitespace-nowrap">
+          <button
+            onClick={() => setShowAuth(true)} 
+            className="btn bg-[#46A358] text-white flex items-center gap-1 px-4 py-2 rounded whitespace-nowrap"
+          >
             <IoIosLogOut />
             Log in
           </button>
+
+          <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} />
         </div>
 
         <button
@@ -85,12 +92,12 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/plant-care" className={navLinkClass} onClick={() => setMenuOpen(false)}>
+              <NavLink to="/profile/accountdetail" className={navLinkClass} onClick={() => setMenuOpen(false)}>
                 Plant Care
               </NavLink>
             </li>
             <li>
-              <NavLink to="/blogs" className={navLinkClass} onClick={() => setMenuOpen(false)}>
+              <NavLink to="/blog" className={navLinkClass} onClick={() => setMenuOpen(false)}>
                 Blogs
               </NavLink>
             </li>
@@ -107,7 +114,13 @@ const Navbar = () => {
                 {cartItems.length}
               </span>
             </Link>
-            <button className="btn bg-[#46A358] text-white flex items-center gap-1 px-4 py-2 rounded whitespace-nowrap">
+            <button
+              onClick={() => {
+                setShowAuth(true);
+                setMenuOpen(false);
+              }}
+              className="btn bg-[#46A358] text-white flex items-center gap-1 px-4 py-2 rounded whitespace-nowrap"
+            >
               <IoIosLogOut />
               Log in
             </button>

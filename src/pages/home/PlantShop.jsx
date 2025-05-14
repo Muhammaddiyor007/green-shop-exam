@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FaSearch, FaHeart, FaShoppingCart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/cartSlice";
+import { addToCart, removeFromCart } from "../../redux/cartSlice"; 
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 export default function PlantShop() {
@@ -21,7 +22,15 @@ export default function PlantShop() {
   const dispatch = useDispatch();
 
   const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
+    const isProductInCart = cartItems.some((item) => item.id === product.id);
+
+    if (isProductInCart) {
+      dispatch(removeFromCart(product));
+      toast.error(` removed from the cart!`); 
+    } else {
+      dispatch(addToCart(product));
+      toast.success(` added to the cart!`); 
+    }
   };
 
   const formatName = (slug) => {
@@ -33,7 +42,7 @@ export default function PlantShop() {
 
   const toggleWishlist = (id) => {
     setWishlist((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
   };
 
@@ -60,14 +69,14 @@ export default function PlantShop() {
       result = result.filter((p) => formatName(p.category) === category);
     }
     result = result.filter(
-      (p) => p.price >= priceRange[0] && p.price <= priceRange[1],
+      (p) => p.price >= priceRange[0] && p.price <= priceRange[1]
     );
     if (size) {
       result = result.filter((p) => p.size === size);
     }
     if (search) {
       result = result.filter((p) =>
-        p.title.toLowerCase().includes(search.toLowerCase()),
+        p.title.toLowerCase().includes(search.toLowerCase())
       );
     }
     if (sort === "priceLow") {
@@ -93,7 +102,9 @@ export default function PlantShop() {
             <li key={cat}>
               <button
                 onClick={() => setCategory(cat)}
-                className={`text-left w-full ${category === cat ? "font-bold text-green-600" : ""}`}
+                className={`text-left w-full ${
+                  category === cat ? "font-bold text-green-600" : ""
+                }`}
               >
                 {cat} <span className="text-sm text-gray-500">({count})</span>
               </button>
@@ -220,7 +231,9 @@ export default function PlantShop() {
 
                 <button
                   onClick={() => toggleWishlist(product.id)}
-                  className={` size-11 hover:text-red-500 ${wishlist.includes(product.id) ? "text-red-500" : "text-gray-400"}`}
+                  className={` size-11 hover:text-red-500 ${
+                    wishlist.includes(product.id) ? "text-red-500" : "text-gray-400"
+                  }`}
                 >
                   <FaHeart />
                 </button>
