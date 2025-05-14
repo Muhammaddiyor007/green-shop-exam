@@ -2,14 +2,18 @@ import { useState } from "react";
 import logo from "../assets/logo.svg";
 import { CiSearch, CiShoppingCart } from "react-icons/ci";
 import { IoIosLogOut, IoMdMenu, IoMdClose } from "react-icons/io";
-import { Link, NavLink } from "react-router-dom";
+import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import AuthModal from "../components/AuthModal";
 
 const Navbar = () => {
   const cartItems = useSelector((state) => state.cart.items);
+  const user = useSelector((state) => state.user.user);
+
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showAuth, setShowAuth] = useState(false); // ✅ Auth modal state
+  const [showAuth, setShowAuth] = useState(false);
+
+  const navigate = useNavigate();
 
   const navLinkClass = ({ isActive }) =>
     isActive
@@ -58,13 +62,24 @@ const Navbar = () => {
               {cartItems.length}
             </span>
           </Link>
-          <button
-            onClick={() => setShowAuth(true)} 
-            className="btn bg-[#46A358] text-white flex items-center gap-1 px-4 py-2 rounded whitespace-nowrap"
-          >
-            <IoIosLogOut />
-            Log in
-          </button>
+          <>
+            {user === null ? (
+              <button
+                onClick={() => setShowAuth(true)}
+                className="btn bg-[#46A358] text-white flex items-center gap-1 px-4 py-2 rounded whitespace-nowrap"
+              >
+                <IoIosLogOut />
+                Log in
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate("/profile/accountdetail")}
+                className="btn bg-[#46A358] text-white flex items-center gap-1 px-4 py-2 rounded whitespace-nowrap"
+              >
+                {user}
+              </button>
+            )}
+          </>
 
           <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} />
         </div>
@@ -82,22 +97,38 @@ const Navbar = () => {
         <div className="md:hidden flex flex-col gap-4 pb-4 animate-slide-down">
           <ul className="flex flex-col gap-3">
             <li>
-              <NavLink to="/" className={navLinkClass} onClick={() => setMenuOpen(false)}>
+              <NavLink
+                to="/"
+                className={navLinkClass}
+                onClick={() => setMenuOpen(false)}
+              >
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink to="/shop" className={navLinkClass} onClick={() => setMenuOpen(false)}>
+              <NavLink
+                to="/shop"
+                className={navLinkClass}
+                onClick={() => setMenuOpen(false)}
+              >
                 Shop
               </NavLink>
             </li>
             <li>
-              <NavLink to="/profile/accountdetail" className={navLinkClass} onClick={() => setMenuOpen(false)}>
+              <NavLink
+                to="/profile/accountdetail"
+                className={navLinkClass}
+                onClick={() => setMenuOpen(false)}
+              >
                 Plant Care
               </NavLink>
             </li>
             <li>
-              <NavLink to="/blog" className={navLinkClass} onClick={() => setMenuOpen(false)}>
+              <NavLink
+                to="/blog"
+                className={navLinkClass}
+                onClick={() => setMenuOpen(false)}
+              >
                 Blogs
               </NavLink>
             </li>
