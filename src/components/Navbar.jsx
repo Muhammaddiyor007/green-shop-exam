@@ -127,6 +127,8 @@ const Navbar = () => {
           </div>
         </div>
       )}
+
+      <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} />
     </div>
   );
 };
